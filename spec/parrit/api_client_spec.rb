@@ -62,7 +62,7 @@ describe Parrit::ApiClient do
       end
 
       it 'asks the network service for state' do
-        expect(network_service.to receive(:get_state).with(Authentication: 'token token_asdbsad')
+        expect(network_service).to receive(:get_state)
         subject.get_state
       end
     end

@@ -16,6 +16,7 @@ module Parrit
     end
 
     def get_state
+      network_service.get_state
     end
 
     private
