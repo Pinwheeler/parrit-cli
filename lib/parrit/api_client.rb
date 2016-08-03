@@ -15,6 +15,9 @@ module Parrit
       self.status = response[0]
     end
 
+    def get_state
+    end
+
     private
 
     def status=(code)
