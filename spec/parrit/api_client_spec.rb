@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'errors'
 
 describe Parrit::ApiClient do
   let(:network_service) { double('network_service') }
@@ -69,9 +70,17 @@ describe Parrit::ApiClient do
     end
 
     context 'when we have not logged in' do
-      it 'does not ask the network for state'
+      it 'does not ask the network for state' do
+        expect(network_service).to_not receive(:get_state)
+        begin
+          subject.get_state
+        rescue
+        end
+      end
 
-      it 'raises an no authentication error'
+      it 'raises a no authentication error' do
+        expect { subject.get_state }.to raise_error(Errors::UnauthenticatedError)
+      end
     end
   end
 end

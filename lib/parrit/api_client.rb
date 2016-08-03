@@ -1,6 +1,9 @@
 require "pry"
+require "errors"
 
 module Parrit
+  UnauthenticatedToken = "unauthenticated"
+  
   class ApiClient
     attr_reader :status
     attr_reader :network_service
@@ -8,7 +11,7 @@ module Parrit
     def initialize(network_service:)
       @status = 204
       @network_service = network_service
-      @auth_token = 'unauthenticated'
+      @auth_token = UnauthenticatedToken
     end
 
     def login(username:, password:)
@@ -19,7 +22,11 @@ module Parrit
 
     def get_state
       token = self.auth_token
-      network_service.get_state(token)
+      if token != UnauthenticatedToken then
+        network_service.get_state(token)  
+      else
+        raise(Errors::UnauthenticatedError)
+      end
     end
 
     protected
