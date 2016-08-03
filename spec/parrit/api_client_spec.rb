@@ -61,8 +61,9 @@ describe Parrit::ApiClient do
         subject.login(username:'mrmeeseeks', password:'lookatme')
       end
 
-      it 'asks the network service for state' do
-        expect(network_service).to receive(:get_state)
+      it 'asks the network service for state using the auth token' do
+        expect(network_service).to receive(:get_state).
+          with({Authenticaion: 'token token_asdbsad'})
         subject.get_state
       end
     end
