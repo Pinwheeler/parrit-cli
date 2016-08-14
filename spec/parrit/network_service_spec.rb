@@ -19,5 +19,11 @@ describe Parrit::NetworkService do
       
       subject.login(project: 'project', password: 'password')
     end
+    
+    it 'starts the request' do
+      expect(request).to receive(:start)
+      
+      subject.login(project: '', password: '')
+    end
   end
 end
