@@ -18,7 +18,7 @@ describe Parrit::ApiClient do
           .to_not raise_error
       end
 
-      it 'passes username and password to network inteface' do
+      it 'passes username and password to network interface' do
         username = 'user'
         password = 'password'
         expect(network_service).to receive(:login).with(username, password)
