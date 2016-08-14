@@ -15,7 +15,7 @@ describe Parrit::NetworkService do
     end
     
     it 'asks for the right request' do
-      expect(request_factory).to receive(:request).with(:POST, 'login', { "name": "project", "password": "password" })
+      expect(request_factory).to receive(:request).with(verb: :POST, route: 'login', body: { "name": "project", "password": "password" })
       
       subject.login(project: 'project', password: 'password')
     end
